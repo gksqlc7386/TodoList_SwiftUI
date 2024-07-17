@@ -6,6 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
+
+/*
+
+ CRUD Functions
+  - Create : addItem()
+  - Read : getItems()
+  - Update : updateItem()
+  - Delete : deleteItem()
+ 
+*/
 
 class ListViewModel: ObservableObject {
     
@@ -35,5 +46,18 @@ class ListViewModel: ObservableObject {
     func addItem(title: String) {
         let newItem = ItemModel(title: title, isCompleted: false)
         items.append(newItem)
+    }
+    
+    func updateItem(item: ItemModel) {
+//        if let index = items.firstIndex { (exsistingItem) -> Bool in
+//            return exsistingItem.id == item.id
+//        } {
+//            //run this code
+//        }
+        
+        //위에 내용과 동일하지만 더 간결
+        if let index = items.firstIndex(where: { $0.id == item.id}) {
+            items[index] = item.updateCompletion() 
+        }
     }
 }
